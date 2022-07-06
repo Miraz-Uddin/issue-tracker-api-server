@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "issues",
+  "info": {
+    "singularName": "issue",
+    "pluralName": "issues",
+    "displayName": "Issue",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "issueTitle": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "issueSubTitle": {
+      "type": "string",
+      "required": true
+    },
+    "issueStartDate": {
+      "type": "date",
+      "required": true
+    },
+    "issueEndDate": {
+      "type": "date",
+      "required": true
+    },
+    "issuePriority": {
+      "type": "enumeration",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "default": "Low",
+      "required": true
+    },
+    "issueStatus": {
+      "type": "enumeration",
+      "enum": [
+        "New",
+        "In Progress",
+        "Completed"
+      ],
+      "default": "New",
+      "required": true
+    },
+    "issuePercentage": {
+      "type": "string",
+      "default": "0",
+      "required": true,
+      "maxLength": 3,
+      "minLength": 1
+    },
+    "issueAssignedTo": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "issueRessolvers"
+    },
+    "issueSlug": {
+      "type": "uid",
+      "targetField": "issueTitle"
+    },
+    "issueAuthor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "issuesCreator"
+    }
+  }
+}
